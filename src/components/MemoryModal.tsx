@@ -61,7 +61,7 @@ export default function MemoryModal({ photo, onClose }: MemoryModalProps) {
 
                 <div className="aspect-[4/3.8] overflow-hidden rounded bg-black relative">
                   <img
-                    src={photo.url}
+                    src={photo.url.startsWith('http') ? photo.url : `${import.meta.env.BASE_URL}${photo.url.replace(/^\//, '')}`}
                     alt={photo.title}
                     referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"

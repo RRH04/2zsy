@@ -57,7 +57,7 @@ export default function MemoryCard({ photo, isActive, onSelect, onDragStart }: M
       {/* Polaroid Image Cassette */}
       <div className="relative aspect-[4/3.8] w-full overflow-hidden rounded bg-neutral-950 pointer-events-none group">
         <img
-          src={photo.url}
+          src={photo.url.startsWith('http') ? photo.url : `${import.meta.env.BASE_URL}${photo.url.replace(/^\//, '')}`}
           alt={photo.title}
           referrerPolicy="no-referrer"
           className="w-full h-full object-cover grayscale-[15%] group-hover:grayscale-0 transition-all duration-500"
