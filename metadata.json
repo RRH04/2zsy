@@ -1,0 +1,6 @@
+{
+  "name": "WXY Memory Wall",
+  "description": "An deep-immersive, highly interactive 3D particle and memory photo wall powered by GSAP and HTML5 Canvas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
