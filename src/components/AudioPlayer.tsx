@@ -16,7 +16,9 @@ export default function AudioPlayer() {
   const synthIntervalRef = useRef<number | null>(null);
 
   // Soft piano / lounge instrumental looping track
-  const audioUrl = `${import.meta.env.BASE_URL}music/bgm.mp3`;
+  const audioUrl = import.meta.env.PROD
+    ? 'https://cdn.jsdelivr.net/gh/RRH04/2zsy@main/public/music/bgm.mp3'
+    : `${import.meta.env.BASE_URL}music/bgm.mp3`;
 
   // Procedural Synth Fallback using Web Audio API:
   // Plays gentle romantic major 7th and add9 chords (Cmaj7 - Fmaj7 - Am9 - Gsus4) to ensure high-fidelity ambient audioscapes independent of network connectivity

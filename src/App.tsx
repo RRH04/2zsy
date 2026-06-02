@@ -70,27 +70,29 @@ export default function App() {
     };
   }, [selectedPhoto]);
 
-  // Center lyric-quote carousel transition (every 5.5 seconds)
+  // Center & Header lyric-quote carousel transition (every 5.5 seconds)
   useEffect(() => {
     const lyricEl = document.getElementById('ambient-lyric');
+    const headerLyricEl = document.getElementById('ambient-header-lyric');
     
     const triggerQuoteTransition = () => {
-      if (!lyricEl) {
+      const targets = [lyricEl, headerLyricEl].filter(Boolean);
+      if (targets.length === 0) {
         setQuoteIndex((prev) => (prev + 1) % romanticQuotes.length);
         return;
       }
 
       // Smooth modern fade-out
-      gsap.to(lyricEl, {
+      gsap.to(targets, {
         opacity: 0,
-        y: -10,
-        filter: 'blur(4px)',
+        y: -8,
+        filter: 'blur(3px)',
         duration: 0.8,
         onComplete: () => {
           setQuoteIndex((prev) => (prev + 1) % romanticQuotes.length);
           // Rise from bottom with blur reset
-          gsap.fromTo(lyricEl, 
-            { opacity: 0, y: 15, filter: 'blur(6px)' },
+          gsap.fromTo(targets, 
+            { opacity: 0, y: 12, filter: 'blur(4px)' },
             { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'power2.out' }
           );
         }
@@ -294,6 +296,20 @@ export default function App() {
           </h1>
           <p className="text-[9px] sm:text-[10px] font-mono tracking-widest text-neutral-400 mt-1 uppercase">
             ETERNAL BLOSSOMS • June 2, 2026
+          </p>
+        </div>
+
+        {/* Center: Glowing BGM Lyric Display (Centered beautifully in the empty header space) */}
+        <div className="hidden sm:flex flex-col items-center justify-center select-none text-center pointer-events-none max-w-[200px] md:max-w-md mx-auto self-center">
+          <div className="flex items-center gap-1 text-[8px] font-mono tracking-[0.2em] text-pink-400/50 uppercase">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-pink-500/60 animate-pulse" />
+            BGM LYRICS / 歌词同步
+          </div>
+          <p
+            id="ambient-header-lyric"
+            className="text-xs md:text-sm font-light tracking-[0.1em] text-pink-100/95 drop-shadow-[0_0_8px_rgba(244,143,177,0.5)] mt-1.5 max-w-[180px] md:max-w-sm truncate leading-normal"
+          >
+            {romanticQuotes[quoteIndex]}
           </p>
         </div>
 
